@@ -1,123 +1,119 @@
 import { Link, NavLink } from "react-router";
-import useAuth from "../../hooks/useAuth";
-import useRole from "../../hooks/useRole";
+import { useContext, useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+
+import logo from '../../assets/food-sharing-nutrition-charity-logo-260nw-2335087999.webp'
+import Loading from "../Loading/Loading"
+
 
 const Navbar = () => {
-  const { user, logout, loading } = useAuth();
-  const { role } = useRole();
+  const { user, logOut,loading } = useContext(AuthContext);
 
-  const navLinkClass = ({ isActive }) =>
-    isActive
-      ? "text-indigo-600 font-semibold"
-      : "text-gray-700 hover:text-indigo-600";
+  const [open, setOpen] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+  if (loading) {
+  return (
+    <div className="w-full shadow-md bg-white p-4 flex justify-center items-center">
+     <Loading></Loading>
+    </div>
+  );
+}
 
-  if (loading) return null;
+  const navLinks = (
+    <>
+      <li><NavLink to="/" className="hover:text-orange-500"> Home </NavLink></li>
+      <li> <NavLink to="/available-foods" className="hover:text-orange-500"> Available Foods </NavLink></li>
+
+      {user && (
+        <> 
+          
+        </>
+      )}
+    </>
+  );
 
   return (
-    <nav className="bg-white shadow sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-indigo-600">
-            GarmentsTracker
-          </Link>
+    <div className="w-full shadow-md bg-white">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
-            <NavLink to="/" className={navLinkClass}>
-              Home
-            </NavLink>
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <img src={logo} alt="logo"className="w-10 h-10"/>
+          <h1 className="text-2xl font-bold text-orange-600">PlateShare</h1>
+        </Link>
 
-            <NavLink to="/products" className={navLinkClass}>
-              All Products
-            </NavLink>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex items-center gap-8 font-semibold">
+          {navLinks}
+        </ul>
 
-            <NavLink to="/about" className={navLinkClass}>
-              About Us
-            </NavLink>
+        {/* User section */}
+        <div className="hidden md:flex items-center gap-4">
+          {!user ? (
+            <Link to="/login" className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700" > Login
+            </Link>
+          ) : (
+            <div className="relative">
+              <img src={user.photoURL} alt="user" className="w-10 h-10 rounded-full cursor-pointer"
+               onClick={() => setDropdown(!dropdown)}
+              />
 
-            <NavLink to="/contact" className={navLinkClass}>
-              Contact
-            </NavLink>
-
-            {!user ? (
-              <>
-                <NavLink to="/login" className={navLinkClass}>
-                  Login
-                </NavLink>
-                <NavLink
-                  to="/register"
-                  className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
-                >
-                  Register
-                </NavLink>
-              </>
-            ) : (
-              <>
-                <NavLink to="/dashboard/profile" className={navLinkClass}>
-                  Dashboard
-                </NavLink>
-
-                {/* Avatar */}
-                <img
-                  src={user.photoURL || "https://i.ibb.co/2kRZ1cG/user.png"}
-                  alt="user"
-                  className="w-9 h-9 rounded-full border"
-                  title={user.displayName}
-                />
-
-                <button
-                  onClick={logout}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                >
-                  Logout
-                </button>
-              </>
-            )}
-          </div>
-
-          {/* Mobile Menu */}
-          <div className="md:hidden dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost">
-              ☰
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content mt-3 p-4 shadow bg-base-100 rounded w-52"
-            >
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/products">All Products</NavLink>
-              </li>
-
-              {!user ? (
-                <>
-                  <li>
-                    <NavLink to="/login">Login</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/register">Register</NavLink>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li>
-                    <NavLink to="/dashboard/profile">
-                      Dashboard ({role})
-                    </NavLink>
-                  </li>
-                  <li>
-                    <button onClick={logout}>Logout</button>
-                  </li>
-                </>
+              {dropdown && (
+                <div className="absolute right-0 mt-3 bg-white shadow-lg rounded-lg p-3 w-40 z-50">
+                  <p className="font-semibold text-center border-b pb-2">
+                    {user.displayName}
+                  </p>
+                  <ul className="list-none">
+                   <li className="decoration"><NavLink to="/add-food" className="hover:text-orange-500">Add Food </NavLink> </li>
+           <li> <NavLink to="/manage-my-foods" className="hover:text-orange-500"> Manage My Foods </NavLink></li>
+          <li><NavLink to="/foodRequests" className="hover:text-orange-500"> My Food Requests</NavLink> </li>
+                   </ul>
+                  <button onClick={logOut} className="mt-3 px-3 py-2 bg-red-500 text-white w-full rounded-lg hover:bg-red-600" >
+                    Logout
+                  </button>
+                </div>
               )}
-            </ul>
-          </div>
+            </div>
+          )}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-2xl"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
-    </nav>
+
+      {/* Mobile Menu */}
+      {open && (
+        <ul className="md:hidden bg-white p-5 space-y-4 font-semibold shadow-lg">
+          {navLinks}
+
+          {!user ? (
+            <Link
+              to="/login"
+              className="block px-4 py-2 bg-orange-600 text-white rounded-lg text-center hover:bg-orange-700"
+            >
+              Login
+            </Link>
+          ) : (<>
+
+           <li><NavLink to="/add-food" className="hover:text-orange-500">Add Food </NavLink> </li>
+           <li> <NavLink to="/manage-my-foods" className="hover:text-orange-500"> Manage My Foods </NavLink></li>
+          <li><NavLink to="/my-requests" className="hover:text-orange-500"> My Food Requests</NavLink> </li>
+            <button onClick={logOut} className="block w-full px-4 py-2 bg-red-500 text-white rounded-lg mt-4 hover:bg-red-600">
+              Logout
+            </button>
+
+            </>
+
+            
+          )}
+        </ul>
+      )}
+    </div>
   );
 };
 

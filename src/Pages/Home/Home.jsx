@@ -2,6 +2,8 @@ import Hero from "./Hero";
 //import OurProducts from "./OurProducts";
 import HowItWorks from "./HowItWorks";
 import Feedback from "./Feedback";
+import ExtraOne from "./ExtraOne"
+import ExtraTwo from "./ExtraTwo"
 
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -18,7 +20,8 @@ const Home = () => {
       {/* <OurProducts /> */}
       <HowItWorks />
       <Feedback />
-      <ExtraOne></ExtraOne>
+     <ExtraOne></ExtraOne>
+
       <ExtraTwo></ExtraTwo>
     </motion.div>
   );

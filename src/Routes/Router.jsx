@@ -34,7 +34,7 @@ import Home from "../Pages/Home/Home";
 import MainLayout from "../Layout/MainLayout";
 import Error from "../Pages/Error/Error";
 
-const router = createBrowserRouter([
+const Router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
@@ -163,5 +163,5 @@ const router = createBrowserRouter([
   //},
 ]);
 
-export default router;
+export default Router;
 

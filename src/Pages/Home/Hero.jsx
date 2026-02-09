@@ -1,38 +1,51 @@
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Link } from "react-router";
+import React from 'react';
+import { motion } from 'framer-motion';
+import banner from '../../assets/banner.jpg';
+import { NavLink } from 'react-router';
 
 const Hero = () => {
   return (
-    <section className="min-h-[90vh] flex items-center bg-linear-to-r from-indigo-600 to-purple-600 text-white">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Garments Order & Production Tracker
-          </h1>
-          <p className="mb-6 text-lg">
-            Track garment production, manage orders, and ensure on-time delivery
-            with ease.
-          </p>
-          <Link
-            to="/products"
-            className="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold"
-          >
-            View Products
-          </Link>
-        </motion.div>
+    <section
+      className="w-full relative bg-cover bg-center bg-no-repeat "
+      style={{
+        backgroundImage: `url(${banner})`
+      }}
+    >
+      {/* Overlay */}
+     
+      {/* Animated Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative py-30 px-auto text-center text-white"
+      >
+        <h1 className="text-6xl font-bold mb-4">
+          Delicious Food, Anytime
+        </h1>
 
-        <motion.img
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          src="https://i.ibb.co/5FJZC6Z/garments.png"
-          alt="Garments"
-          className="rounded-xl"
-        />
-      </div>
+        <p className="text-lg max-w-2xl mx-auto mb-6">
+          A community-driven platform to share food, reduce waste, and help others.
+          Discover available foods near you.
+        </p>
+<motion.nav
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  <NavLink
+    to="/available-foods"
+    className="bg-green-600 px-6 py-3 rounded-xl text-lg font-semibold 
+                transition  duration-300 buttonbanner buttonin flex items-center gap-2"
+  >
+    <div className="hoverEffect">
+      <div></div>
+    </div>
+    Available Foods
+  </NavLink>
+</motion.nav>
+
+
+      </motion.div>
     </section>
   );
 };
