@@ -2,8 +2,9 @@ import { Link, NavLink } from "react-router";
 import { useContext, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-import logo from '../../assets/food-sharing-nutrition-charity-logo-260nw-2335087999.webp'
+//import logo from '../../assets/food-sharing-nutrition-charity-logo-260nw-2335087999.webp'
 import Loading from "../Loading/Loading"
+import { AuthContext } from "../../Providers/AuthContext";
 
 
 const Navbar = () => {
@@ -38,7 +39,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="logo"className="w-10 h-10"/>
+          <img src={} alt="logo"className="w-10 h-10"/>
           <h1 className="text-2xl font-bold text-orange-600">PlateShare</h1>
         </Link>
 
