@@ -11,6 +11,8 @@ import {
 } from "firebase/auth";
 import axios from "axios";
 import { app } from "../Firebse.config";
+import { AuthContext } from "./AuthContext"
+
 
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app)

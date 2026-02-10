@@ -1,84 +1,75 @@
 import { Link, NavLink } from "react-router";
-import { useContext, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-
-//import logo from '../../assets/food-sharing-nutrition-charity-logo-260nw-2335087999.webp'
-import Loading from "../Loading/Loading"
+import { useContext, useState } from "react";import { FaBars, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../../Providers/AuthContext";
-
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
-  const { user, logOut,loading } = useContext(AuthContext);
-
+  const { user, logOut } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
-  if (loading) {
-  return (
-    <div className="w-full shadow-md bg-white p-4 flex justify-center items-center">
-     <Loading></Loading>
-    </div>
-  );
-}
 
-  const navLinks = (
+  const commonLinks = (
     <>
-      <li><NavLink to="/" className="hover:text-orange-500"> Home </NavLink></li>
-      <li> <NavLink to="/available-foods" className="hover:text-orange-500"> Available Foods </NavLink></li>
-
-      {user && (
-        <> 
-          
-        </>
-      )}
+      <li><NavLink to="/" className="text-orange-500 hover:text-orange-700">Home</NavLink></li>
+      <li><NavLink to="/all-products" className="text-orange-500 hover:text-orange-700">All Products</NavLink></li>
+      <li><NavLink to="/about" className="text-orange-500 hover:text-orange-700">About Us</NavLink></li>
+      <li><NavLink to="/contact" className="text-orange-500 hover:text-orange-700">Contact</NavLink></li>
     </>
   );
 
   return (
-    <div className="w-full shadow-md bg-white">
+    <header className="w-full bg-yellow-200 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img src={} alt="logo"className="w-10 h-10"/>
-          <h1 className="text-2xl font-bold text-orange-600">PlateShare</h1>
+          <img src={logo} alt="logo" className="w-10 h-10" />
+          <h1 className="text-2xl font-bold text-orange-600">
+            ThreadCraft
+          </h1>
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-8 font-semibold">
-          {navLinks}
+        <ul className="hidden md:flex items-center gap-8 font-medium">
+          {commonLinks}
+          {user && (
+            <li>
+              <NavLink to="/dashboard" className="text-orange-500 hover:text-orange-700">
+                Dashboard
+              </NavLink>
+            </li>
+          )}
         </ul>
 
-        {/* User section */}
+        {/* Right Side */}
         <div className="hidden md:flex items-center gap-4">
           {!user ? (
-            <Link to="/login" className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700" > Login
-            </Link>
+            <>
+              <Link to="/login" className="px-4 py-2 rounded-lg text-orange-500 hover:text-orange-700 border border-orange-500">Login</Link>
+              <Link
+                to="/register"
+                className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+              >
+                Register
+              </Link>
+            </>
           ) : (
-            <div className="relative">
-              <img src={user.photoURL} alt="user" className="w-10 h-10 rounded-full cursor-pointer"
-               onClick={() => setDropdown(!dropdown)}
+            <>
+              <img
+                src={user.photoURL || "https://i.ibb.co/2kR7Q0k/user.png"}
+                alt="user"
+                className="w-9 h-9 rounded-full"
               />
-
-              {dropdown && (
-                <div className="absolute right-0 mt-3 bg-white shadow-lg rounded-lg p-3 w-40 z-50">
-                  <p className="font-semibold text-center border-b pb-2">
-                    {user.displayName}
-                  </p>
-                  <ul className="list-none">
-                   <li className="decoration"><NavLink to="/add-food" className="hover:text-orange-500">Add Food </NavLink> </li>
-           <li> <NavLink to="/manage-my-foods" className="hover:text-orange-500"> Manage My Foods </NavLink></li>
-          <li><NavLink to="/foodRequests" className="hover:text-orange-500"> My Food Requests</NavLink> </li>
-                   </ul>
-                  <button onClick={logOut} className="mt-3 px-3 py-2 bg-red-500 text-white w-full rounded-lg hover:bg-red-600" >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
+              <button
+                onClick={logOut}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Logout
+              </button>
+            </>
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle */}
         <button
           className="md:hidden text-2xl"
           onClick={() => setOpen(!open)}
@@ -89,32 +80,35 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {open && (
-        <ul className="md:hidden bg-white p-5 space-y-4 font-semibold shadow-lg">
-          {navLinks}
+        <ul className="md:hidden bg-white px-6 py-4 space-y-4 font-medium shadow-lg">
+          {commonLinks}
+
+          {user && (
+            <li>
+              <NavLink to="/dashboard" className="hover:text-orange-500">
+                Dashboard
+              </NavLink>
+            </li>
+          )}
 
           {!user ? (
-            <Link
-              to="/login"
-              className="block px-4 py-2 bg-orange-600 text-white rounded-lg text-center hover:bg-orange-700"
-            >
-              Login
-            </Link>
-          ) : (<>
-
-           <li><NavLink to="/add-food" className="hover:text-orange-500">Add Food </NavLink> </li>
-           <li> <NavLink to="/manage-my-foods" className="hover:text-orange-500"> Manage My Foods </NavLink></li>
-          <li><NavLink to="/my-requests" className="hover:text-orange-500"> My Food Requests</NavLink> </li>
-            <button onClick={logOut} className="block w-full px-4 py-2 bg-red-500 text-white rounded-lg mt-4 hover:bg-red-600">
-              Logout
-            </button>
-
+            <>
+              <li><NavLink to="/login">Login</NavLink></li>
+              <li><NavLink to="/register">Register</NavLink></li>
             </>
-
-            
+          ) : (
+            <li>
+              <button
+                onClick={logOut}
+                className="w-full px-4 py-2 bg-red-500 text-white rounded-lg"
+              >
+                Logout
+              </button>
+            </li>
           )}
         </ul>
       )}
-    </div>
+    </header>
   );
 };
 
