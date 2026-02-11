@@ -1,45 +1,58 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import banner from '../../assets/banner.avif';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 
 
 const Hero = () => {
   return (
     <section
-      className="w-full relative bg-cover bg-center bg-no-repeat "
-      style={{
-        backgroundImage: `url(${banner})`
-      }}
-    >
-      {/* Overlay */}
-     
-      {/* Animated Content */}
+      className="relative h-[90vh] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: `url(${banner})` }}>
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/20"></div>
+
+      {/* Content */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative py-30 px-auto text-center text-gray-200"
+        transition={{ duration: 1 }}
+        className="relative z-10 text-center max-w-3xl px-6"
       >
-        <h1 className=" text-[40px] md:text-6xl font-bold mb-4">
-          Delicious Food, Anytime
-        </h1>
+        <motion.h1
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="text-4xl md:text-6xl font-bold leading-tight"
+        >
+          Smart Production.
+          <br />
+          Seamless Tracking.
+        </motion.h1>
 
-        <p className="text-[20px] md:text-lg max-w-2xl mx-auto mb-6">
-          A community-driven platform to share food, reduce waste, and help others.
-          Discover available foods near you.
-        </p>
-<motion.nav whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-  <NavLink to="/available-foods" className="bg-orange-600 px-6 py-3 rounded-xl text-lg font-semibold w-fit inline-flex mx-auto
-                transition  duration-300 buttonbanner buttonin flex items-center gap-2">
-    <div className="hoverEffect">
-      <div></div>
-    </div>
-    Login
-  </NavLink>
-</motion.nav>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-6 text-lg md:text-xl text-gray-200"
+        >
+          Manage your garments orders, track every production stage,
+          and deliver on time with confidence.
+        </motion.p>
 
-
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="mt-8"
+        >
+          <Link
+            to="/all-products"
+            className="px-10 py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700  text-xl"
+          >
+            Explore Products
+          </Link>
+        </motion.div>
       </motion.div>
     </section>
   );
