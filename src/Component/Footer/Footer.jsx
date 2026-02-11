@@ -1,63 +1,55 @@
-import { Link } from "react-router";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import logo from "../../assets/logo.png";
+import { motion } from "framer-motion";
 
 const Footer = () => {
+  const links = ["Home", "All Products", "About Us", "Contact"];
+
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
-        
-        {/* Logo & Description */}
-        <div>
-          <h2 className="text-2xl font-bold text-white">
-            GarmentsTracker
-          </h2>
-          <p className="mt-4 text-sm">
-            A modern garments order & production tracking system
-            designed to simplify factory workflows and ensure
-            on-time delivery.
-          </p>
+    <footer className="bg-yellow-500 text-white pt-16 relative overflow-hidden">
+      {/* Background effect */}
+      
+
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        {/* Top section */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-0 mb-12">
+          {/* Logo & Description */}
+          <div className="flex flex-col items-start">
+            <img src={logo} alt="logo" className="w-12 h-12 mb-2" />
+            <h1 className="text-2xl font-bold text-orange-400 mb-2">GarmentsTracker</h1>
+            <p className="text-gray-300 max-w-sm">
+              Streamline your garment orders & production workflow. Secure, reliable, and easy-to-use platform for factories.
+            </p>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              {links.map((link, index) => (
+                <li key={index} className="hover:text-orange-400 cursor-pointer transition-colors duration-300">
+                  {link}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Social icons */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+            <div className="flex gap-4 text-gray-300">
+              <FaFacebookF className="hover:text-blue-500 cursor-pointer transition-colors duration-300" />
+              <FaTwitter className="hover:text-blue-400 cursor-pointer transition-colors duration-300" />
+              <FaInstagram className="hover:text-pink-500 cursor-pointer transition-colors duration-300" />
+              <FaLinkedinIn className="hover:text-blue-700 cursor-pointer transition-colors duration-300" />
+            </div>
+          </div>
         </div>
 
-        {/* Useful Links */}
-        <div>
-          <h3 className="text-lg font-semibold text-white mb-4">
-            Useful Links
-          </h3>
-          <ul className="space-y-2">
-            <li>
-              <Link to="/" className="hover:text-indigo-400">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/products" className="hover:text-indigo-400">
-                All Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/login" className="hover:text-indigo-400">
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link to="/register" className="hover:text-indigo-400">
-                Register
-              </Link>
-            </li>
-          </ul>
+        {/* Bottom section */}
+        <div className="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
+          © {new Date().getFullYear()} GarmentsTracker. All rights reserved.
         </div>
-
-        {/* Contact / Info */}
-        <div>
-          <h3 className="text-lg font-semibold text-white mb-4">
-            Contact
-          </h3>
-          <p>Email: support@garmentstracker.com</p>
-          <p className="mt-2">Phone: +880 1XXX-XXXXXX</p>
-        </div>
-      </div>
-
-      <div className="border-t border-gray-700 text-center py-4 text-sm">
-        © {new Date().getFullYear()} GarmentsTracker. All rights reserved.
       </div>
     </footer>
   );
