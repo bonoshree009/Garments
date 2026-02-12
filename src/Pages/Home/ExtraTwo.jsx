@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaLock, FaShieldAlt, FaSyncAlt } from "react-icons/fa";
 

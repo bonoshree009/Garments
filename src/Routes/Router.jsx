@@ -4,8 +4,8 @@ import { createBrowserRouter } from "react-router";
 //import DashboardLayout from "../layouts/DashboardLayout";
 
 import Home from "../Pages/Home/Home";
-// import Login from "../pages/auth/Login";
-// import Register from "../pages/auth/Register";
+import Login from "../pages/auth/Login";
+
 // import AllProducts from "../pages/products/AllProducts";
 // import ProductDetails from "../pages/products/ProductDetails";
 
@@ -33,6 +33,7 @@ import Home from "../Pages/Home/Home";
 // import BuyerRoute from "./BuyerRoute";
 import MainLayout from "../Layout/MainLayout";
 import Error from "../Pages/Error/Error";
+import Register from "../Pages/Auth/Register";
 
 const Router = createBrowserRouter([
   {
@@ -41,8 +42,8 @@ const Router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       { path: "/", element: <Home /> },
-      //{ path: "/login", element: <Login /> },
-      //{ path: "/register", element: <Register /> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element:<Register></Register> },
       //{ path: "/products", element: <AllProducts /> },
      // {
       //  path: "/products/:id",

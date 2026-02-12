@@ -1,12 +1,13 @@
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const Footer = () => {
   const links = ["Home", "All Products", "About Us", "Contact"];
 
   return (
-    <footer className="bg-yellow-500 text-white pt-16 relative overflow-hidden">
+    <footer className="bg-white text-orange-500 border-4 border-amber-400 pt-16 relative overflow-hidden">
       {/* Background effect */}
       
 
@@ -16,8 +17,8 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="flex flex-col items-start">
             <img src={logo} alt="logo" className="w-12 h-12 mb-2" />
-            <h1 className="text-2xl font-bold text-orange-400 mb-2">GarmentsTracker</h1>
-            <p className="text-gray-300 max-w-sm">
+            <h1 className="text-2xl font-bold mb-2">GarmentsTracker</h1>
+            <p className=" max-w-sm">
               Streamline your garment orders & production workflow. Secure, reliable, and easy-to-use platform for factories.
             </p>
           </div>
@@ -47,7 +48,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom section */}
-        <div className="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
+        <div className="border-t border-orange-500 pt-6 text-center text-orange-500 text-sm">
           © {new Date().getFullYear()} GarmentsTracker. All rights reserved.
         </div>
       </div>

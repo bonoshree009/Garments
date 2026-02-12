@@ -90,8 +90,8 @@ const Navbar = () => {
 
           {!user ? (
             <>
-              <li><NavLink to="/login">Login</NavLink></li>
-              <li><NavLink to="/register">Register</NavLink></li>
+              <li className="px-4 py-2 rounded-lg text-orange-500 hover:text-orange-700 border border-orange-500 w-fit"><NavLink to="/login" >Login</NavLink></li>
+              <li className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 w-fit"><NavLink to="/register">Register</NavLink></li>
             </>
           ) : (
             <li>
