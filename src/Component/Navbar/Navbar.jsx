@@ -1,12 +1,37 @@
 import { Link, NavLink } from "react-router";
-import { useContext, useState } from "react";import { FaBars, FaTimes } from "react-icons/fa";
-import { AuthContext } from "../../Providers/AuthContext";
+import { useState } from "react";import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/logo.png";
 
-const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
-  const [open, setOpen] = useState(false);
+import useAuth from "../../Hooks/useAuth";
+import { toast } from "react-toastify";
+import Loader from "../Shared/Loader";
 
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const {logout,user, loading}= useAuth();
+  const handleLogout = () => {
+  logout()
+    .then(() => {
+      toast.success("Logged out successfully");
+    })
+    .catch(() => {
+      toast.error("Logout failed");
+    });
+};
+
+   {loading && (
+      <div className="w-full shadow-md bg-white p-4 flex justify-center items-center">
+        <Loader />
+      </div>
+    )}
+
+    {!loading && (
+      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        {/* Navbar content */}
+      </div>
+    )}
+   
+  
   const commonLinks = (
     <>
       <li><NavLink to="/" className="text-orange-500 hover:text-orange-700">Home</NavLink></li>
@@ -55,11 +80,11 @@ const Navbar = () => {
           ) : (
             <>
               <img
-                src={user.photoURL || "https://i.ibb.co/2kR7Q0k/user.png"}
+                src={user.photoURL}
                 alt="user"
                 className="w-9 h-9 rounded-full"
               />
-              <button onClick={logOut}  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" >
+              <button onClick={logout}  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" >
                 Logout
               </button>
             </>
@@ -96,7 +121,7 @@ const Navbar = () => {
           ) : (
             <li>
               <button
-                onClick={logOut}
+                onClick={handleLogout}
                 className="w-full px-4 py-2 bg-red-500 text-white rounded-lg"
               >
                 Logout
@@ -105,6 +130,7 @@ const Navbar = () => {
           )}
         </ul>
       )}
+   
     </header>
   );
 };

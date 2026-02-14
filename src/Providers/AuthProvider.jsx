@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { Profiler, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile,
   GoogleAuthProvider,
   signInWithPopup,
   getAuth,
+  updateProfile,
 } from "firebase/auth";
-import axios from "axios";
+
 import { app } from "../Firebse.config";
-import { AuthContext } from "./AuthContext"
+import { AuthContext } from "./AuthContext";
 
 
 const googleProvider = new GoogleAuthProvider();
@@ -22,58 +22,45 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Register
-  const registerUser = async (email, password, name, photoURL) => {
-    const result = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    await updateProfile(result.user, {
-      displayName: name,
-      photoURL,
-    });
-    return result;
-  };
+  const registerUser =(email, password,) => {
+    setLoading(true)
+    return createUserWithEmailAndPassword( auth, email,password);
+    };
 
   // Login
   const loginUser = (email, password) => {
+       setLoading(true)
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+   const updateUserProfile =(profile)=>{
+    return updateProfile(auth.currentUser, profile)
+   }
   // Google Login
   const googleLogin = () => {
+       setLoading(true)
     return signInWithPopup(auth, googleProvider);
   };
 
   // Logout
-  const logout = async () => {
-    await axios.post(
-      `${import.meta.env.VITE_API_URL}/logout`,
-      {},
-      { withCredentials: true }
-    );
+  const logout =()=> {
     return signOut(auth);
   };
 
   // Auth State Observer
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-
-      if (currentUser) {
-        // 🔥 Request JWT from backend
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/jwt`,
-          { email: currentUser.email },
-          { withCredentials: true }
-        );
+useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
+      if (currentuser) {
+        setUser(currentuser);
+      } else {
+        setUser(null);
       }
-
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
 
   const authInfo = {
     user,
@@ -81,13 +68,12 @@ const AuthProvider = ({ children }) => {
     registerUser,
     loginUser,
     googleLogin,
+    updateUserProfile,
     logout,
   };
 
   return (
-    <AuthContext.Provider value={authInfo}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext value={authInfo}>{children}</AuthContext>
   );
 };
 

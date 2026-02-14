@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
-import { AuthContext } from './AuthProvider';
+import React from 'react';
+
 import { Navigate, useLocation } from 'react-router';
-import Spinner from '../Components/Spinner'
+
+import useAuth from '../Hooks/useAuth';
+import Loader from '../Component/Shared/Loader';
 
 const PrivateRoute = ({children}) => {
-    const {user,loading} =useContext(AuthContext)
+    const {user,loading} =useAuth()
     const location =useLocation()
+
     if(loading){
-        return <Spinner></Spinner>
+        return <Loader></Loader>
     }
     if(user && user?.email){
         return children

@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <div className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-amber-300">
       <motion.h1
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="text-7xl font-bold text-indigo-600"
+        className="text-7xl font-bold text-white"
       >
         404
       </motion.h1>
@@ -23,7 +23,7 @@ const NotFound = () => {
 
       <Link
         to="/"
-        className="mt-6 bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
+        className="mt-6 bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition"
       >
         Back to Home
       </Link>

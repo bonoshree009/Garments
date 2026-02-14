@@ -3,11 +3,66 @@ import loginImg from "../../assets/LoginPic.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+import useAuth from "../../Hooks/useAuth";
+import { useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
     const {register, handleSubmit, formState:{errors}} =useForm()
+    const {registerUser, updateUserProfile}= useAuth()
+     const navigate = useNavigate();
+  const location = useLocation();
+  const redirectPath = location.state?.from?.pathname || "/";
+
     const handleRegister =(data)=>{
-        console.log("afetr register",data)
+        console.log("after register",data);
+         const profileImg= data.photoURL[0]
+        registerUser(data.email,data.password).
+        then(() =>{
+             const formData = new FormData()
+             formData.append("image", profileImg)
+             const image_Api_Url= `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_Host_key}`
+
+             axios.post(image_Api_Url, formData).then (res =>{
+                console.log("after image upload", res.data.data.url)
+                // update profile
+                const userprofile = {
+                    displayName : data.name,
+                    photoURL : res.data.data.url
+                }
+                updateUserProfile(userprofile).then(async () =>{
+
+                    await fetch("http://localhost:3000/users", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      role: data.role,
+      password : data.password,
+      photoURL: data.photoURL,
+      status: "pending"
+    })
+  });
+
+                     
+                     toast.success(" Succesfully Register")
+                      navigate(redirectPath);
+                }
+                
+            )
+                .catch(error=> console.log(error))
+
+             })
+
+        }).
+        catch((error) =>{
+             console.log("Firebase register error:", error.message);
+           toast.error("Register Failed!");
+        })
 
     }
   return (
@@ -25,7 +80,7 @@ const Register = () => {
         <div className="w-full max-w-md p-10 rounded-2xl  backdrop-blur-lg bg-white/20 border border-white/30 shadow-2xl text-white">
 
           <h2 className="text-3xl font-bold mb-6 text-center">
-            Welcome Back
+           Register Now!
           </h2>
 
           <form className="space-y-5" onSubmit={handleSubmit(handleRegister)}>
@@ -53,8 +108,8 @@ const Register = () => {
           <div>
             <label className="block mb-1 text-sm font-medium">Photo URL</label>
             <input
-              type="text"
-              className="w-full px-4 py-2 border rounded-lg"
+              type="file"
+              className="w-full px-4 py-2 border rounded-lg file-input" placeholder="Your photo"
               {...register("photoURL", {
                 required: "Photo URL is required",
               })}
@@ -70,6 +125,7 @@ const Register = () => {
               <option value="">Select Role</option>
               <option value="buyer">Buyer</option>
               <option value="manager">Manager</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
 
@@ -101,7 +157,7 @@ const Register = () => {
 
             </div>
             <button  type="submit"className="w-full py-3 rounded-lg bg-orange-600 hover:bg-orange-800  transition font-semibold text-white" >
-              Login
+             Register
             </button>
            <h1> Already have an account? <Link to="/login" className="text-orange-700">Login</Link></h1>
           </form>
