@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import useAuth from "../Hooks/useAuth";
 import Navbar from "../Component/Navbar/Navbar";
 import Footer from "../Component/Footer/Footer";
+import Loader from "../Component/Shared/Loader";
 
 const MainLayout = () => {
   const { role,loading } = useAuth();
@@ -37,7 +38,7 @@ const MainLayout = () => {
 
 
   if (loading) {
-  return <div className="text-center mt-20">Loading...</div>;
+  return <div className="flex mx-auto justify-center"> <Loader></Loader></div>;
 }
 
   return (

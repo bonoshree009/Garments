@@ -47,7 +47,7 @@ const ProductDetails = () => {
             <p className="mt-2"><strong>Category:</strong> {product.category}</p>
             <p className="mt-1"><strong>Price:</strong> ${product.price}</p>
             <p className="mt-1"><strong>Available Quantity:</strong> {product.quantity}</p>
-            <p className="mt-1"><strong>Minimum Order:</strong> {product.minOrder}</p>
+            <p className="mt-1"><strong>Minimum Order:</strong> {product.minimumOrder}</p>
             <p className="mt-1"><strong>Payment Options:</strong> {product.paymentOptions}</p>
 
             {/* Order / Booking Button - logic example */}

@@ -2,9 +2,7 @@ import React from 'react';
 
 const Loader = () => {
     return (
-        <div>
-            ami loder
-        </div>
+        <span className="loading loading-spinner mx-auto text-orange-500 w-50"></span>
     );
 };
 

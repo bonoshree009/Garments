@@ -17,7 +17,7 @@ const Login = () => {
     const {register, handleSubmit, formState:{errors}} = useForm()
      const {loginUser,googleLogin}= useAuth()
      const handlelogin =(data)=>{
-        console.log("afetr login",data);
+        // console.log("afetr login",data);
         loginUser(data.email,data.password).then(()=>{
             toast.success("Login Successful!");
             navigate(redirectPath);
@@ -25,8 +25,8 @@ const Login = () => {
         })
         
     .catch((error) =>{
-          console.log("Error Code:", error.code);
-          console.log("Error Message:", error.message);
+          // console.log("Error Code:", error.code);
+           console.log("Error Message:", error.message);
         toast.error("Login Failed!");
         })
      }

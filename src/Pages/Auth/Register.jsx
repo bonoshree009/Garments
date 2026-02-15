@@ -16,7 +16,7 @@ const Register = () => {
   const redirectPath = location.state?.from?.pathname || "/";
 
     const handleRegister =(data)=>{
-        console.log("after register",data);
+        // console.log("after register",data);
          const profileImg= data.photoURL[0]
         registerUser(data.email,data.password).
         then(() =>{
@@ -25,7 +25,7 @@ const Register = () => {
              const image_Api_Url= `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_Host_key}`
 
              axios.post(image_Api_Url, formData).then (res =>{
-                console.log("after image upload", res.data.data.url)
+                // console.log("after image upload", res.data.data.url)
                 // update profile
                 const userprofile = {
                     displayName : data.name,
