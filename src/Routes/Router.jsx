@@ -5,9 +5,6 @@ import { createBrowserRouter } from "react-router";
 import Home from "../Pages/Home/Home";
 import Login from "../pages/auth/Login";
 
-// import AllProducts from "../pages/products/AllProducts";
-// import ProductDetails from "../pages/products/ProductDetails";
-
 // Dashboard Pages
 // import ManageUsers from "../pages/dashboard/admin/ManageUsers";
 // import AdminAllProducts from "../pages/dashboard/admin/AllProducts";
@@ -36,6 +33,8 @@ import Register from "../Pages/Auth/Register";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import PrivateRoute from "../Providers/PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
+import AllProducts from "../Pages/Products/AllProducts";
+import ProductDetails from "../Pages/Products/ProductDetails";
 
 const Router = createBrowserRouter([
   {
@@ -46,16 +45,16 @@ const Router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element:<Register></Register> },
-      {path : "/about", element: <AboutUs></AboutUs>}
-      //{ path: "/products", element: <AllProducts /> },
-     // {
-      //  path: "/products/:id",
-       // element: (
-         // <PrivateRoute>
-         //   <ProductDetails />
-         // </PrivateRoute>
-       // ),
-     // },
+      {path : "/about", element: <AboutUs></AboutUs>},
+      { path: "/all-products", element: <AllProducts /> },
+      {
+       path: "/all-products/:id",
+       element: (
+         <PrivateRoute>
+           <ProductDetails />
+         </PrivateRoute>
+       ),
+     },
     ],
   },
 

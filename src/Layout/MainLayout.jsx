@@ -12,13 +12,19 @@ const MainLayout = () => {
     switch (role) {
       case "admin":
         return [
-          { name: "Manage Users", path: "/manage-users" },
-          { name: "All Products", path: "/all-products" },
-        ];
+
+  { name: "Manage Users", path: "/manage-users" },
+    { name: "All products", path: "/all-poroducts" },
+      { name: "All Oders", path: "/all-orders" }
+        
+    ];
       case "manager":
         return [
-          { name: "Add Product", path: "/add-product" },
-          { name: "Manage Products", path: "/manage-products" },
+          { name: "Add products", path: "/add-poroducts" },
+          { name: "Manage-Products", path: "/manage-products" },
+          { name: "Pending Orders", path: "/pending-orders" },
+          { name: "Approve Orders", path: "/approve-order" },
+          { name: "My Profile", path: "/my-profile" },
         ];
       case "buyer":
         return [
@@ -53,11 +59,11 @@ const MainLayout = () => {
       </div>
 
       {/* Sidebar */}
-      <div className="drawer-side z-50 ">
+      <div className="drawer-side z-50">
         <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
 
-        <ul className="menu p-4 w-80 min-h-full bg-base-200">
-          <h2 className="text-xl font-bold mb-4">Dashboard</h2>
+        <ul className="menu p-4 w-80 min-h-full bg-amber-300 text-white text-2xl">
+          <h2 className="text-4xl font-bold mb-4 text-orange-600 ">Dashboard</h2>
 
           {links.length > 0 ? (
             links.map((link) => (
