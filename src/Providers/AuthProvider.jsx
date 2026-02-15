@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/users/${encodeURIComponent(currentUser.email)}`
+        `https://garments-server-blush.vercel.app/users/${encodeURIComponent(currentUser.email)}`
       );
 
       if (!res.ok) throw new Error("User not found");

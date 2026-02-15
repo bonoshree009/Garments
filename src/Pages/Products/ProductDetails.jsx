@@ -11,7 +11,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/allproducts/${id}`);
+        const res = await axios.get(`https://garments-server-blush.vercel.app/allproducts/${id}`);
         setProduct(res.data);
       } catch (err) {
         console.error("Error fetching product:", err);

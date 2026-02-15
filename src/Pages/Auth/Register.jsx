@@ -33,7 +33,7 @@ const Register = () => {
                 }
                 updateUserProfile(userprofile).then(async () =>{
              const imageUrl = res.data.data.url;
-                    await fetch("http://localhost:3000/users", {
+                    await fetch("https://garments-server-blush.vercel.app/users", {
     method: "POST",
     headers: {
       "content-type": "application/json"

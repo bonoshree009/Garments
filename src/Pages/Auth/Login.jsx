@@ -34,7 +34,7 @@ const Login = () => {
    googleLogin().then(async (result) => {
   const user = result.user;
 
-  await fetch("http://localhost:3000/users", {
+  await fetch("https://garments-server-blush.vercel.app/users", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
