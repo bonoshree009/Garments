@@ -11,7 +11,9 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`https://garments-server-blush.vercel.app/allproducts/${id}`);
+        const res = await axios.get(
+          `https://garments-server-blush.vercel.app/allproducts/${id}`
+        );
         setProduct(res.data);
       } catch (err) {
         console.error("Error fetching product:", err);
@@ -22,15 +24,17 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <div className="text-center mt-20">Loading Product...</div>;
-  if (!product) return <div className="text-center mt-20">Product not found</div>;
+  if (loading)
+    return <div className="text-center mt-20">Loading...</div>;
+
+  if (!product) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white rounded-lg w-11/12 md:w-3/4 lg:w-1/2 p-6 relative overflow-y-auto max-h-[90vh]">
+      <div className="bg-white rounded-lg w-11/12 md:w-3/4 lg:w-1/2 p-6 relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 font-bold text-xl"
+          className="absolute top-3 right-3 text-xl font-bold"
         >
           &times;
         </button>
@@ -41,21 +45,19 @@ const ProductDetails = () => {
             alt={product.name}
             className="w-full md:w-1/2 h-64 object-cover rounded"
           />
-          <div className="flex-1">
-            <h2 className="text-2xl font-bold">{product.name}</h2>
-            <p className="text-gray-700 mt-2">{product.description}</p>
-            <p className="mt-2"><strong>Category:</strong> {product.category}</p>
-            <p className="mt-1"><strong>Price:</strong> ${product.price}</p>
-            <p className="mt-1"><strong>Available Quantity:</strong> {product.quantity}</p>
-            <p className="mt-1"><strong>Minimum Order:</strong> {product.minimumOrder}</p>
-            <p className="mt-1"><strong>Payment Options:</strong> {product.paymentOptions}</p>
 
-            {/* Order / Booking Button - logic example */}
-            {product.role !== "admin" && product.role !== "manager" && (
-              <button className="mt-4 py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700 transition">
-                Place Order
-              </button>
-            )}
+          <div>
+            <h2 className="text-2xl font-bold">{product.name}</h2>
+            <p className="mt-2">{product.description}</p>
+            <p className="mt-1"><b>Category:</b> {product.category}</p>
+            <p className="mt-1"><b>Price:</b> ${product.price}</p>
+            <p className="mt-1"><b>Quantity:</b> {product.quantity}</p>
+            <p className="mt-1"><b>Minimum Order:</b> {product.minimumOrder}</p>
+            <p className="mt-1"><b>Payment:</b> {product.paymentOptions}</p>
+
+            <button className="mt-4 px-4 py-2 bg-green-600 text-white rounded">
+              Place Order
+            </button>
           </div>
         </div>
       </div>
