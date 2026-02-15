@@ -1,16 +1,59 @@
-# React + Vite
+# Garments Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a **Garments E-commerce Website** built with **React**, **Tailwind CSS**, **Firebase Authentication**, and **MongoDB** for the backend. It supports role-based dashboards, product management, and order booking.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## React Compiler
+- [Features](#features)  
+- [Technologies Used](#technologies-used)  
+- [Project Structure](#project-structure)  
+- [Setup & Installation](#setup--installation)  
+- [Deployment](#deployment)  
+- [Future Improvements](#future-improvements)  
+- [License](#license)  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Authentication
+- Register and Login using **Firebase Auth**  
+- Role assignment during registration: `admin`, `manager`, `buyer`  
+- Google Sign-in  
+
+### Role-Based Dashboard
+- **Admin:** Manage users, view all products  
+- **Manager:** Add/manage products  
+- **Buyer:** View orders and products, book/order items  
+
+### Products
+- **All Products Page:** 3-column grid layout with product cards  
+- **Product Details Page:** Modal shows full description, images, features, payment options  
+- **Homepage:** Shows 6 featured products below banner  
+
+### Orders
+- Buyers can order/booking products  
+- Only logged-in buyers can place orders  
+
+### UI/UX
+- Fully responsive using Tailwind CSS  
+- Smooth animations using Framer Motion  
+
+---
+
+## Technologies Used
+
+- **Frontend:** React, Tailwind CSS, Framer Motion  
+- **Authentication:** Firebase Auth  
+- **Backend:** Node.js, Express.js  
+- **Database:** MongoDB (Atlas)  
+- **Hosting/Deployment:**  
+  - Frontend: **Netlify** (React App)  
+  - Backend: **Vercel** (Express API)  
+
+---
+
+## Project Structure
+
