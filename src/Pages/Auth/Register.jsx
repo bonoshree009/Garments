@@ -32,7 +32,7 @@ const Register = () => {
                     photoURL : res.data.data.url
                 }
                 updateUserProfile(userprofile).then(async () =>{
-
+             const imageUrl = res.data.data.url;
                     await fetch("http://localhost:3000/users", {
     method: "POST",
     headers: {
@@ -42,8 +42,7 @@ const Register = () => {
       name: data.name,
       email: data.email,
       role: data.role,
-      password : data.password,
-      photoURL: data.photoURL,
+      photoURL:  imageUrl,
       status: "pending"
     })
   });

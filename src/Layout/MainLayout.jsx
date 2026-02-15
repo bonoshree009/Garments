@@ -1,31 +1,92 @@
-import { Outlet, useLocation } from "react-router";
-//import Navbar from "../components/Navbar/Navbar";
-//import Footer from "../components/footer/Footer";
-import { useEffect } from "react";
+import { Outlet, useLocation, Link } from "react-router";
+import { useMemo } from "react";
+import useAuth from "../Hooks/useAuth";
 import Navbar from "../Component/Navbar/Navbar";
 import Footer from "../Component/Footer/Footer";
 
 const MainLayout = () => {
+  const { role,loading } = useAuth();
   const location = useLocation();
 
-  // Dynamic Page Title
-  useEffect(() => {
-    const path = location.pathname;
-    if (path === "/") document.title = "Garments Tracker | Home";
-    else if (path === "/login") document.title = "Login | Garments Tracker";
-    else if (path === "/register")
-      document.title = "Register | Garments Tracker";
-    else if (path === "/products")
-      document.title = "Products | Garments Tracker";
-    else document.title = "Garments Tracker";
-  }, [location]);
+  const links = useMemo(() => {
+    switch (role) {
+      case "admin":
+        return [
+          { name: "Manage Users", path: "/manage-users" },
+          { name: "All Products", path: "/all-products" },
+        ];
+      case "manager":
+        return [
+          { name: "Add Product", path: "/add-product" },
+          { name: "Manage Products", path: "/manage-products" },
+        ];
+      case "buyer":
+        return [
+          { name: "My Orders", path: "/my-orders" },
+        ];
+      default:
+        return [];
+    }
+  }, [role]);
+
+
+  if (loading) {
+  return <div className="text-center mt-20">Loading...</div>;
+}
 
   return (
-    <div className="flex flex-col p-0 m-0">
-      <Navbar></Navbar>
+    <div className="drawer drawer-end ">
+      {/* Drawer Toggle */}
+      <input id="dashboard-drawer" type="checkbox" className="drawer-toggle " />
 
-      <main className="grow"> <Outlet /></main>
-    <Footer></Footer>
+      {/* Main Content */}
+      <div className="drawer-content flex flex-col ">
+
+        {/* Navbar */}
+        <Navbar />
+
+        <main className="grow">
+          <Outlet />
+        </main>
+
+        <Footer />
+      </div>
+
+      {/* Sidebar */}
+      <div className="drawer-side z-50 ">
+        <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+
+        <ul className="menu p-4 w-80 min-h-full bg-base-200">
+          <h2 className="text-xl font-bold mb-4">Dashboard</h2>
+
+          {links.length > 0 ? (
+            links.map((link) => (
+              <li key={link.name}>
+                <Link
+                  to={link.path}
+                  className={
+                    location.pathname === link.path
+                      ? "font-bold text-primary"
+                      : ""
+                  }
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li>
+              <h1 className="text-red-500">Role: {role}</h1>
+              <span>No Access</span>
+            </li>
+          )}
+
+          <div className="divider"></div>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

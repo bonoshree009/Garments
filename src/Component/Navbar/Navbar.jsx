@@ -58,9 +58,11 @@ const Navbar = () => {
           {commonLinks}
           {user && (
             <li>
-              <NavLink to="/dashboard" className="text-orange-500 hover:text-orange-700">
+              <label htmlFor="dashboard-drawer" className="btn btn-ghost text-orange-500 hover:bg-orange-400 hover:text-white">
+            
                 Dashboard
-              </NavLink>
+            
+                     </label>
             </li>
           )}
         </ul>
@@ -106,10 +108,11 @@ const Navbar = () => {
           {commonLinks}
 
           {user && (
-            <li>
-              <NavLink to="/dashboard" className="hover:text-orange-500">
-                Dashboard
-              </NavLink>
+            <li> 
+       <label htmlFor="dashboard-drawer" className="btn btn-ghost text-orange-500 hover:bg-orange-400 hover:text-white">
+        Dashboard </label>
+
+              
             </li>
           )}
 

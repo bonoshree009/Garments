@@ -31,14 +31,24 @@ const Login = () => {
         })
      }
 
-     const handleGoogle = () => {
-    googleLogin()
-      .then(() => {
-        toast.success("Google Login Successful!");
-        navigate(redirectPath);
-      })
-      .catch(() => toast.error("Google Login Failed!"));
-  };
+   googleLogin().then(async (result) => {
+  const user = result.user;
+
+  await fetch("http://localhost:3000/users", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      name: user.displayName,
+      email: user.email,
+      role: "buyer", // default
+      photoURL: user.photoURL,
+      status: "active"
+    })
+  });
+
+  toast.success("Google Login Successful!");
+  navigate(redirectPath);
+});
 
     return (
     <section
@@ -103,7 +113,7 @@ const Login = () => {
 
           {/* Google Login Button */}
           <button className="w-full flex items-center justify-center gap-3  bg-white text-black py-3 rounded-lg hover:bg-gray-200 
-          transition font-medium" onClick={handleGoogle}><FcGoogle size={22} />Continue with Google</button>
+          transition font-medium" onClick={googleLogin}><FcGoogle size={22} />Continue with Google</button>
 
         </div>
 
