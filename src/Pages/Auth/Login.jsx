@@ -104,7 +104,7 @@ const Login = () => {
             <div className="grow h-px bg-white/40"></div>
           </div>
 
-
+          {/* ✅ FIXED GOOGLE BUTTON */}
           <button
             onClick={handleGoogleLogin}
             className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 rounded-lg hover:bg-gray-200"
@@ -120,3 +120,6 @@ const Login = () => {
 };
 
 export default Login;
+
+// vvcj
+// cnscn
