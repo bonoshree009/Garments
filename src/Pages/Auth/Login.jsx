@@ -121,5 +121,3 @@ const Login = () => {
 
 export default Login;
 
-// vvcj
-// cnscn
