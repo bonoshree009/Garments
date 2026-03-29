@@ -121,6 +121,3 @@ const Login = () => {
 
 export default Login;
 
-// // jjjjjjjjjjjjjjjjjjjjjj
-// dkskds
-// dkmkd
