@@ -122,9 +122,3 @@ const Login = () => {
 
 export default Login;
 
-
-
-{/* <kbd>kzkms
-  ccc
-</kbd> */}
-
