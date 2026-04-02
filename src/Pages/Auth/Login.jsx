@@ -122,7 +122,3 @@ const Login = () => {
 
 export default Login;
 
-// cccccccccc
-// vvvvvvv
-// vvvv
-// CSSSkewX
